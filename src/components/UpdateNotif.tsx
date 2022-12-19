@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import EditNotif from './Edit';
 import NotifDialog from './EditDialog';
+import ParentHeaderNavBar from './ParentHeadNavbar';
 
 const UpdateNotif = (props: any) => {
 
@@ -31,7 +32,8 @@ const UpdateNotif = (props: any) => {
 
 
     return (
-      <div>        
+      <div>     
+        <ParentHeaderNavBar /> 
           <Stack direction='column' spacing={1.5} 
           sx={{display: 'flex', 
           justifyContent: 'center', 
@@ -41,7 +43,7 @@ const UpdateNotif = (props: any) => {
 
            <Box style={{display: 'flex',marginRight: 500, justifyContent: 'center',width: 300, 
             height: 38, background: '#05b3e2', borderRadius: 7, 
-            marginTop: 100}}>
+            marginTop: 80}}>
 
               <Typography sx={{marginTop: 1,fontFamily: 'Inter',color: 'white',textTransform:'none'}} 
               variant='button' gutterBottom>

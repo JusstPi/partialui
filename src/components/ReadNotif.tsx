@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import NotifDialog from './Dialog';
 import { useNavigate, useParams } from 'react-router-dom';
 import NotificationsList from './NotificationsList';
+import ParentHeaderNavBar from './ParentHeadNavbar';
 
 const ReadNotif = () => {
   //const { notifyId } = useParams();
@@ -29,6 +30,7 @@ const ReadNotif = () => {
 
   return (
     <div>
+      <ParentHeaderNavBar />
       <Stack
         direction='column'
         spacing={1.5}
@@ -49,7 +51,7 @@ const ReadNotif = () => {
             height: 38,
             background: '#05b3e2',
             borderRadius: 7,
-            marginTop: 100,
+            marginTop: 80,
           }}
         >
           <Typography

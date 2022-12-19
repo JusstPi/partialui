@@ -1,5 +1,6 @@
 import * as React from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material';
 
@@ -13,7 +14,9 @@ const NotifDialog = () => {
   //const Navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [text, setText] = React.useState('');
-  const [notifications, setNotifications] = React.useState<Notification[]>([]); // Add a state variable to hold the notification list
+
+  // Add a state variable to hold the notification list
+  const [notifications, setNotifications] = React.useState<Notification[]>([]); 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,22 +31,19 @@ const NotifDialog = () => {
   };
 
   const createNotification = (notification: Notification) => {
-    fetch(`http://localhost:8080/notification/postNotif`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(notification)
-    })
+    axios.post(`http://localhost:8080/notification/postNotif`, notification)
       .then(() => {
         console.log(notification);
         handleClose();
+        window.location.reload()
       })
   };
 
   // Add a useEffect hook to update the notification list after creating a new notification
   React.useEffect(() => {
-    fetch(`http://localhost:8080/notification/getNotif`) // Fetch the updated notification list from the server
-      .then(response => response.json())
-      .then(data => setNotifications(data)); // Update the notification list state variable with the new data
+    axios.get(`http://localhost:8080/notification/getNotif`) // Replace fetch with axios
+      .then(response => response.data) // Use response.data instead of response.json()
+      .then(data => setNotifications(data));; // Update the notification list state variable with the new data
   }, []); // The empty array tells the useEffect hook to only run the effect once, when the component is mounted
 
   return (
